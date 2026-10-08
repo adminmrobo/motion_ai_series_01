@@ -1,7 +1,36 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><style id="i18n-css">
+.lang-top{flex:none;display:inline-flex;align-items:center;gap:4px;margin:0 8px;font:600 13px/1.2 system-ui,sans-serif}
+.lang-top select{font:inherit;color:inherit;background:rgba(0,0,0,.25);border:1px solid currentColor;border-radius:6px;padding:4px 6px;cursor:pointer;opacity:.9;max-width:140px}
+.lang-top select:hover,.lang-top select:focus-visible{opacity:1}
+.lang-top option{color:#111;background:#fff}
+.alarm .lang-top{color:var(--text,#efe9ff)}
+.lang-pick{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;font:600 14px/1.2 system-ui,sans-serif}
+.lang-pick>button{display:flex;gap:6px;align-items:center;background:#25283a;color:#eceaf3;border:1px solid #4a4f6e;border-radius:999px;padding:9px 14px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.4);font:inherit}
+.lang-pick>button:hover{border-color:#f1b646}
+.lang-pick ul{position:absolute;right:0;bottom:calc(100% + 8px);margin:0;padding:6px;list-style:none;background:#1c1e2d;border:1px solid #4a4f6e;border-radius:12px;min-width:150px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.lang-pick ul[hidden]{display:none}
+.lang-pick a{display:block;padding:8px 12px;border-radius:8px;color:#eceaf3;text-decoration:none}
+.lang-pick a:hover,.lang-pick a:focus-visible{background:#25283a}
+.lang-pick a[aria-current]{color:#f1b646}
+@media print{.lang-pick,.lang-top{display:none}}</style><script id="i18n-js">(function(){var L=["ko","en","zh","ja","uz","ru"],cur="ko",K="motion_ai_lang";
+function base(){var f=decodeURIComponent(location.pathname.split("/").pop()||"index.html");return f.replace(/(\.(ko|en|zh|ja|uz|ru))?\.html?$/i,"")||"index"}
+function url(l){return base()+(l==="ko"?".html":"."+l+".html")+location.hash}
+function get(){try{var v=localStorage.getItem(K);return L.indexOf(v)>=0?v:null}catch(e){return null}}
+function set(l){try{localStorage.setItem(K,l)}catch(e){}}
+window.i18nGo=function(l){if(L.indexOf(l)<0)return;set(l);if(l!==cur)location.href=url(l)};
+var q=null;try{q=new URLSearchParams(location.search).get("lang")}catch(e){}
+if(q&&L.indexOf(q)>=0){set(q);if(q!==cur)location.replace(url(q));return}
+if(cur!=="ko")return;
+var stored=get(),want=stored;
+if(!want){var n=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""];for(var i=0;i<n.length;i++){var c=String(n[i]).toLowerCase().slice(0,2);if(c==="ko")break;if(L.indexOf(c)>=0){want=c;break}}}
+if(!want||want==="ko")return;
+var de=document.documentElement;de.style.visibility="hidden";var done=false;function show(){if(!done){done=true;de.style.visibility=""}}setTimeout(show,2500);
+if(location.protocol==="file:"){if(stored)location.replace(url(want));else show();return}
+try{fetch(url(want).split("#")[0],{method:"HEAD",cache:"no-store"}).then(function(r){if(r.ok)location.replace(url(want));else show()},show)}catch(e){show()}
+})();</script><link rel="alternate" hreflang="ko" href="5-3_encoder_decoder.html"><link rel="alternate" hreflang="en" href="5-3_encoder_decoder.en.html"><link rel="alternate" hreflang="zh-CN" href="5-3_encoder_decoder.zh.html"><link rel="alternate" hreflang="ja" href="5-3_encoder_decoder.ja.html"><link rel="alternate" hreflang="uz" href="5-3_encoder_decoder.uz.html"><link rel="alternate" hreflang="ru" href="5-3_encoder_decoder.ru.html"><link rel="alternate" hreflang="x-default" href="5-3_encoder_decoder.html">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>5-3 인코더·디코더 — 동작을 접었다 펼친다 | 동작 AI</title>
 <meta name="description" content="막대 인형 동작 1,196개 숫자를 16개로 접었다 펼치는 인코더·디코더. 잠재 지도와 손잡이, 떨림 제거와 가림 복원, 적은 데이터로 투기 탐지, 손잡이 없는 동작 생성까지. 글 안상선.">
@@ -473,7 +502,7 @@ figure.shot figcaption{font-size:.84rem;color:var(--muted);padding:8px 12px;back
 <body>
 <nav class="top" aria-label="이 페이지의 목차">
   <div class="wrap">
-    <a class="brand" href="#top"><span class="hexmark" aria-hidden="true"></span>5-3 인코더·디코더</a>
+    <a class="brand" href="#top"><span class="hexmark" aria-hidden="true"></span>5-3 인코더·디코더</a><label class="lang-top"><span aria-hidden="true">🌐</span><select aria-label="언어 / Language" onchange="i18nGo(this.value)"><option value="ko" selected lang="ko">한국어</option><option value="en" lang="en">English</option><option value="zh" lang="zh-CN">中文</option><option value="ja" lang="ja">日本語</option><option value="uz" lang="uz">Oʻzbekcha</option><option value="ru" lang="ru">Русский</option></select></label>
     <a href="#brief">미션</a><a href="#fun">깔때기</a><a href="#knob">잠재 지도</a><a href="#fix">떨림·가림</a><a href="#det">투기 탐지</a><a href="#gen">생성</a><a href="#limits">한계</a><a href="#code">코드</a><a href="#teach">교육자 TIP</a>
   </div>
 </nav>
@@ -1879,5 +1908,5 @@ Gloss(GL,{scope:'section.level, header.hero, footer',skip:['mcard','codepanel','
 })();
 
 </script>
-</body>
+<div class="lang-pick" id="langPick"><button type="button" aria-haspopup="true" aria-expanded="false" aria-label="언어: 한국어"><span aria-hidden="true">🌐</span>한국어</button><ul hidden><li><a href="5-3_encoder_decoder.html" hreflang="ko" lang="ko" data-l="ko" aria-current="true">한국어</a></li><li><a href="5-3_encoder_decoder.en.html" hreflang="en" lang="en" data-l="en">English</a></li><li><a href="5-3_encoder_decoder.zh.html" hreflang="zh-CN" lang="zh-CN" data-l="zh">中文</a></li><li><a href="5-3_encoder_decoder.ja.html" hreflang="ja" lang="ja" data-l="ja">日本語</a></li><li><a href="5-3_encoder_decoder.uz.html" hreflang="uz" lang="uz" data-l="uz">Oʻzbekcha</a></li><li><a href="5-3_encoder_decoder.ru.html" hreflang="ru" lang="ru" data-l="ru">Русский</a></li></ul></div><script>(function(){var p=document.getElementById("langPick"),b=p.querySelector("button"),u=p.querySelector("ul");function t(o){u.hidden=!o;b.setAttribute("aria-expanded",o?"true":"false")}b.addEventListener("click",function(e){e.stopPropagation();t(u.hidden)});document.addEventListener("click",function(e){if(!p.contains(e.target))t(false)});document.addEventListener("keydown",function(e){if(e.key==="Escape")t(false)});u.addEventListener("click",function(e){var a=e.target.closest("a[data-l]");if(!a)return;e.preventDefault();i18nGo(a.getAttribute("data-l"))});})();</script></body>
 </html>
